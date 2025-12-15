@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <set>
 #include <map>
+#include <algorithm>
 #include "nameEntry.hpp"
 
 using namespace std;
@@ -63,15 +64,28 @@ int main(){
     }
 
     // Mean of male names
-
+    cout << "--- MEAN NAME ---" << endl;
     for(int i=0; i < maxNameSize; i++){ 
         double totalValue=0, total=0;
         for(auto c: letterTable[i]){
             totalValue += c.first*c.second;
             total += c.second;
         }
- 
+        
         cout << (char)(totalValue/total) ;
     }
+    cout << endl << endl;
+
+    //Median of male names
+    cout << "--- MEDIAN NAME ---" << endl;
+
+    for(int i=0; i < maxNameSize; i++){ 
+        vector<pair<char, int>> letterArr(letterTable[i].begin(), letterTable[i].end());
+        sort(letterArr.begin(), letterArr.end(), [](pair<char, int> &a, pair<char, int> &b){
+            return a.second > b.second;
+        });
+        cout << letterArr[letterArr.size()/2].first;
+    }
+    cout << endl << endl;
     return 0;
 }
