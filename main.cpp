@@ -77,8 +77,8 @@ int main(){
     cout << endl << endl;
 
     //Median of male names
-    cout << "--- MEDIAN NAME ---" << endl;
-
+    cout << "--- MEDIAN NAME (sorted by letter popularity) ---" << endl;
+    
     for(int i=0; i < maxNameSize; i++){ 
         vector<pair<char, int>> letterArr(letterTable[i].begin(), letterTable[i].end());
         sort(letterArr.begin(), letterArr.end(), [](pair<char, int> &a, pair<char, int> &b){
@@ -86,6 +86,20 @@ int main(){
         });
         cout << letterArr[letterArr.size()/2].first;
     }
+    cout << endl << endl;
+    
+    cout << "--- MODE NAME ---" << endl;
+    for(int i=0; i < maxNameSize; i++){
+        int max=0; char maxLetter='\0';
+        for(auto p: letterTable[i]){
+            if(p.second > max){
+                max=p.second;
+                maxLetter=p.first;
+            }
+        }
+        cout << maxLetter;
+    }
+
     cout << endl << endl;
     return 0;
 }
