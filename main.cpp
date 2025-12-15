@@ -2,10 +2,19 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <unordered_map>
+#include <set>
+#include <map>
 #include "nameEntry.hpp"
 
 using namespace std;
 
+struct SortByValue{
+    bool operator()(const pair<char, int>& p1, 
+        const pair<char, int>& p2 ){
+            return p1.second < p2.second;
+    }
+};
 
 
 int main(){
@@ -16,6 +25,8 @@ int main(){
     vector<NameEntry> maleNameArr(1000); // there are 1000 lines in the csv file
     vector<NameEntry> femaleNameArr(1000); 
     vector<string> fields(5); // for storing fields as we read the csv
+    int maxNameSize = 0; // gets updated in the csv read loop
+
     while(getline(nameFile, line)){ // read the whole csv file
         stringstream lineStream(line);
         getline(lineStream, line, ',');
@@ -37,10 +48,30 @@ int main(){
         catch(exception) {
             throw "stoi() call failed!";
         }
+
+        // update maxNameSize
+        maxNameSize = (fields[1].size() > maxNameSize) ? fields[1].size():maxNameSize;
+        maxNameSize = (fields[3].size() > maxNameSize) ? fields[3].size():maxNameSize;
     }
     
-    for(auto name : maleNameArr){
-        cout << name << endl;
+    // the world is my cloyster
+    vector<unordered_map<char, int>> letterTable(maxNameSize); // unordered, not sorted
+    for(auto nameE: maleNameArr){
+        for(int i=0; i < nameE.name.size(); i++){
+            letterTable[i][nameE.name[i]]+=nameE.count;
+        }
+    }
+
+    // Mean of male names
+
+    for(int i=0; i < maxNameSize; i++){ 
+        double totalValue=0, total=0;
+        for(auto c: letterTable[i]){
+            totalValue += c.first*c.second;
+            total += c.second;
+        }
+ 
+        cout << (char)(totalValue/total) ;
     }
     return 0;
 }
