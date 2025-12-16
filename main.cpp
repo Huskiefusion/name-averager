@@ -111,20 +111,37 @@ int main(){
     }
     
 
-
-    // Mean of male names
-    cout << "--- MEAN NAME ---" << endl;
+    cout << "--- Generic Name ---" << endl;
+    cout << "Mean: ";
     findAvgName(maxNameSize, letterTable);
-    cout << endl << endl;
-
-    //Median of male names
-    cout << "--- MEDIAN NAME (sorted by letter popularity) ---" << endl;
+    cout << endl;
+    cout << "Median: ";
     findMedianName(maxNameSize, letterTable);
-    cout << endl << endl;
-    
-    cout << "--- MODE NAME ---" << endl;
+    cout << endl;
+    cout << "Mode: ";
     findModeName(maxNameSize, letterTable);
+    cout << endl << endl;
 
+    cout << "--- Male Name ---" << endl;
+    cout << "Mean: ";
+    findAvgName(maxMaleName, maleTable);
+    cout << endl;
+    cout << "Median: ";
+    findMedianName(maxMaleName, maleTable);
+    cout << endl;
+    cout << "Mode: ";
+    findModeName(maxMaleName, maleTable);
+    cout << endl << endl;
+
+    cout << "--- Female Name ---" << endl;
+    cout << "Mean: ";
+    findAvgName(maxFemaleName, femaleTable);
+    cout << endl;
+    cout << "Median: ";
+    findMedianName(maxFemaleName, femaleTable);
+    cout << endl;
+    cout << "Mode: ";
+    findModeName(maxFemaleName, femaleTable);
     cout << endl << endl;
     return 0;
 }
