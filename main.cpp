@@ -89,7 +89,6 @@ int main(){
         maxFemaleName = (fields[3].size() > maxFemaleName) ? fields[3].size():maxFemaleName;
     }
     maxNameSize = (maxFemaleName > maxMaleName) ? maxFemaleName : maxMaleName;
-    cout << maxNameSize << ", " << maxMaleName <<", "<<maxFemaleName <<  endl;
 
     // the world is my cloyster
     vector<unordered_map<char, int>> letterTable(maxNameSize), 
